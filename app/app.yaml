@@ -1,0 +1,32 @@
+command: [
+  "streamlit",
+  "run",
+  "app.py",
+]
+env:
+  - name: "DATABRICKS_HTTP_PATH"
+    value: "/sql/1.0/warehouses/6a09f4ec67bb14b5"
+  - name: "DATABRICKS_WAREHOUSE_ID"
+    value: "6a09f4ec67bb14b5"
+  - name: "DATABRICKS_SERVER_HOSTNAME"
+    value: "fe-vm-ef-demo-workspace.cloud.databricks.com"
+  - name: "CATALOG_NAME"
+    value: "demos"
+  - name: "SCHEMA_NAME"
+    value: "access_control"
+  - name: "ACCESS_TABLE"
+    value: "group_customer_access"
+  - name: "AUDIT_TABLE"
+    value: "access_audit_log"
+  - name: "ADMIN_GROUP"
+    value: "access_admin"
+  - name: "APP_TITLE"
+    value: "Unity Catalog Access Management"
+  - name: "PAGE_ICON"
+    value: "UC"
+
+resources:
+  - name: sql_warehouse
+    sql_warehouse:
+      id: 6a09f4ec67bb14b5
+      permission: CAN_USE

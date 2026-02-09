@@ -1,0 +1,22 @@
+bundle:
+  name: abac_helper_app
+
+resources:
+  apps:
+    abac_access_manager:
+      name: abac-helper
+      description: "Unity Catalog access management app"
+      source_code_path: app
+  sql_warehouses:
+    access_warehouse:
+      id: 6a09f4ec67bb14b5
+  secrets:
+    app_secret:
+      scope: example-scope
+      key: example-key
+
+targets:
+  dev:
+    mode: development
+    workspace:
+      host: https://fe-vm-ef-demo-workspace.cloud.databricks.com
