@@ -79,8 +79,6 @@ def _render_access_matrix() -> None:
             use_container_width=True,
             hide_index=True,
         )
-        _render_access_heatmap(current_df)
-
     st.markdown("### Expired in Last 60 Days")
     if expired_df.is_empty():
         st.info("No recently expired access rules.")
@@ -101,31 +99,6 @@ def _render_access_matrix() -> None:
             hide_index=True,
         )
 
-
-def _render_access_heatmap(df: pl.DataFrame) -> None:
-    """Render a heatmap view for current access rules."""
-    if df.is_empty():
-        return
-    try:
-        import plotly.express as px
-    except Exception:
-        return
-    heat_df = (
-        df.group_by(["group_name", "access_type"])
-        .agg(pl.sum("customer_count").alias("customer_count"))
-        .to_pandas()
-    )
-    if heat_df.empty:
-        return
-    fig = px.density_heatmap(
-        heat_df,
-        x="access_type",
-        y="group_name",
-        z="customer_count",
-        color_continuous_scale="Blues",
-        title="Access Matrix Heatmap (Customer Count)",
-    )
-    st.plotly_chart(fig, use_container_width=True)
 
 
 def _render_tag_coverage() -> None:
